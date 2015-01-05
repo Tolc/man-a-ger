@@ -1,0 +1,29 @@
+<section data-ng-controller="RestosController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1 data-ng-bind="resto.name"></h1>
+	</div>
+	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == resto.user._id))">
+		<a class="btn btn-primary" href="/#!/restos/{{resto._id}}/edit">
+			<i class="glyphicon glyphicon-edit"></i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="remove();">
+			<i class="glyphicon glyphicon-trash"></i>
+		</a>
+	</div>
+
+	<ul>
+		<li>Proximity: {{resto.proximity}}</li>
+		<li>Healthiness: {{resto.healthiness}}</li>
+		<li>Price: {{resto.price | currency}}</li>
+		<li>Image: {{resto.image}}</li>
+	</ul>
+	<p class="lead" data-ng-bind="resto.description"></p>
+	<small>
+		<em class="text-muted">
+			Posted on
+			<span data-ng-bind="resto.created | date:'mediumDate'"></span>
+			by
+			<span data-ng-bind="resto.user.displayName"></span>
+		</em>
+	</small>
+</section>
