@@ -43,7 +43,7 @@
 				</a>
 			</div>
 		</div>
-		<div class="row">
+		<div data-ng-show="todayVotes.length > 0" class="row">
 			<h2>Today's other votes</h2>
 			<div data-ng-repeat="vote in todayVotes" class="col-md-3">
 				<h2 data-ng-bind="vote.resto.name"></h2>

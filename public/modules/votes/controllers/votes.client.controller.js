@@ -32,6 +32,7 @@ angular.module('votes').controller('VotesController', ['$scope', '$stateParams',
 				//$location.path('votes/' + response._id);
 				$scope.success = 'Votre vote pour ' + resto.name + ' a été pris en compte.';
 				$scope.alreadyVoted = true;
+				$scope.todayVotes = $scope.todayVotes = TodayVotes.todayVotes();
 
 				// Clear form fields
 				//$scope.name = '';

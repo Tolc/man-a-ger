@@ -38,15 +38,15 @@ exports.create = function(req, res) {
 						message: 'User already voted today'
 					});
 				} else {
-					vote.users.push(req.user);
-					vote.save(function(err) {
+					exVote.users.push(req.user);
+					exVote.save(function(err) {
 						if (err) {
 							console.log(err);
 							return res.status(400).send({
 								message: errorHandler.getErrorMessage(err)
 							});
 						} else {
-							res.jsonp(vote);
+							res.jsonp(exVote);
 						}
 					});
 				}
