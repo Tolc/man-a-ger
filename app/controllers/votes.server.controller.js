@@ -161,7 +161,6 @@ exports.todayVotes = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			console.log(todayVotes);
 			res.jsonp(todayVotes);
 		}
 	});
