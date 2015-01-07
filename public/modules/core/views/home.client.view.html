@@ -1,3 +1,42 @@
+<div class="wrap" data-ng-controller="HomeController">
+	<div class="column_left">
+		<div class="column_right_grid date_events">
+			<h3>
+				<!--<a href="#" id="slide_prev"><img src="modules/core/images/arrow-left.png" alt="" /></a>-->
+				{{dayString}}
+				<!--<a href="#" id="slide_next"><img src="modules/core/images/arrow-right.png" alt="" /></a>-->
+			</h3>
+			<ul id="slide" class="event_dates">
+				<li data-ng-bind="day"></li>
+			</ul>
+			<h3 data-ng-bind="month"></h3>
+			<!--<div class="button"><a href="#">Add Event</a></div>-->
+		</div>
+	</div>
+	<div class="column_middle">
+		<div class="column_middle_grid1" data-ng-controller="RestosController">
+			<div class="profile_picture">
+				<a href=""><img src="modules/core/img/brand/logo.jpg" alt="logo">	</a>
+				<div class="profile_picture_name">
+					<h2>{{todayResto.name}}</h2>
+					<h2 ng-hide="todayResto">Todays resto is still unknown</h2>
+					<p>Lorem ipsum dolor sit amet consectetur adipisicing </p>
+				</div>
+				<span><a href="#"> <img src="modules/core/images/follow_user.png" alt=""> </a></span>
+			</div>
+			<div class="articles_list">
+				<ul>
+					<li><a href="#" class="red"> <img src="modules/core/images/comments.png" alt=""> 23</a></li>
+					<li><a href="#" class="purple"> <img src="modules/core/images/views.png" alt=""> 841</a></li>
+					<li><a href="#" class="yellow"> <img src="modules/core/images/likes.png" alt=""> 49</a></li>
+					<div class="clear"></div>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="column_right"></div>
+</div>
+
 <section data-ng-controller="HomeController">
 	<div class="jumbotron text-center">
 		<div class="row">
@@ -56,26 +95,6 @@
 				<a class="btn btn-primary btn-lg" data-ng-hide="alreadyVoted" data-ng-click="create(vote.resto)">Vote for that too</a>
 			</div>
 		</div>
-	</div>
-	<div class="well">
-		<h2>MEAN.JS Documentation</h2>
-		<p>
-			Once you're familiar with the foundation technology, check out the MEAN.JS Documentation:
-			<ul>
-				<li><a target="_blank" href="http://meanjs.org/docs.html">MEAN.JS Documentation</a>
-				</li>
-				<li><a target="_blank" href="http://meanjs.org/generator.html">Yeoman Generator</a>
-				</li>
-				<li><a target="_blank" href="http://meanjs.org/modules.html">Modules</a>
-				</li>
-				<li><a target="_blank" href="http://meanjs.org/changelog.html">Changelog</a>
-				</li>
-				<li><a target="_blank" href="http://meanjs.org/community.html">Community</a>
-				</li>
-				<li><a target="_blank" href="http://blog.meanjs.org">Blog</a>
-				</li>
-			</ul>
-		</p>
 	</div>
 	<br>Enjoy &amp; Keep Us Updated,
 	<br>thcoq@smile.fr
