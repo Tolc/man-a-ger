@@ -12,5 +12,6 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 		$scope.day = now.getDate();
 		$scope.dayString = days[now.getDay()];
 		$scope.month = months[now.getMonth()];
+		$scope.time = now.getHours() + ':' + now.getMinutes()
 	}
 ]);
