@@ -43,8 +43,9 @@
 	<![endif]-->
 </head>
 
-<body class="ng-cloak">
-	<header data-ng-include="'/modules/core/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header>
+<body class="ng-cloak" >
+	<!--<header data-ng-include="'/modules/core/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header>-->
+	<div data-ng-include="'/modules/core/views/header.client.view.html'" class="wrap"></div>
 	<section class="content">
 		<section class="container">
 			{% block content %}{% endblock %}

@@ -1,0 +1,19 @@
+<div id="loginContainer">
+    <a id="loginButton" href="/#!/settings/profile"><span data-ng-bind="authentication.user.username"></span></a>
+    <div id="loginBox" style="display: none;">
+        <form id="loginForm">
+            <fieldset id="body">
+                <div class="user-info">
+                    <h4>Hello,<a href="#" data-ng-bind="authentication.user.displayName"></a></h4>
+                    <ul>
+                        <li class="profile"><a href="/#!/settings/profile">Profile</a></li>
+                        <li class="profile"><a href="/#!/settings/password">Change Password</a></li>
+                        <li class="profile"><a href="/#!/settings/accounts">Manage Social Accounts</a></li>
+                        <li class="logout"><a href="/auth/signout"> Logout</a></li>
+                        <div class="clear"></div>
+                    </ul>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

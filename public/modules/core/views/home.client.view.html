@@ -1,6 +1,6 @@
 <div class="wrap" data-ng-controller="HomeController">
 	<div class="column_left">
-		<div class="column_right_grid date_events">
+		<div class="grid column_right_grid date_events">
 			<h3>
 				<!--<a href="#" id="slide_prev"><img src="modules/core/images/arrow-left.png" alt="" /></a>-->
 				{{month}}
@@ -9,13 +9,13 @@
 			<ul id="slide" class="event_dates">
 				<li data-ng-bind="day"></li>
 			</ul>
-			<h3 data-ng-bind="dayString"></h3>
-			<h2 data-ng-bind="time"></h2>
+			<h3 class="week-day" data-ng-bind="dayString"></h3>
+			<!--<h2 data-ng-bind="time"></h2>-->
 			<!--<div class="button"><a href="#">Add Event</a></div>-->
 		</div>
 	</div>
 	<div class="column_middle">
-		<div class="column_middle_grid1" data-ng-controller="RestosController">
+		<div class="grid column_middle_grid1" data-ng-controller="RestosController">
 			<div class="profile_picture">
 				<a href=""><img src="modules/core/img/brand/logo.jpg" alt="logo">	</a>
 				<div class="profile_picture_name">
@@ -23,7 +23,7 @@
 					<h2 ng-hide="todayResto">Todays resto is still unknown</h2>
 					<!--<p>Lorem ipsum dolor sit amet consectetur adipisicing </p>-->
 				</div>
-				<span><a href="#"> <img src="modules/core/images/follow_user.png" alt=""> </a></span>
+				<!--<span><a href="#"> <img src="modules/core/images/follow_user.png" alt=""> </a></span>-->
 			</div>
 			<div class="articles_list">
 				<ul>
@@ -36,37 +36,46 @@
 		</div>
 	</div>
 	<div class="column_right">
-		<div class="menu_box"  data-ng-controller="VotesController">
+		<div class="grid menu_box vote"  data-ng-controller="VotesController">
 			<div data-ng-show="!voteEnabled">
 				<h3>Who's going where?</h3>
 				<div class="menu_box_list">
-					<ul>
+					<ul class="votes-list">
 						<li data-ng-repeat="vote in todayVotes">
 							<a href="#">
 								<span data-ng-bind="vote.resto.name"></span>
-								<label data-ng-show="!alreadyVoted">Join</label>
 								<label class="digits" data-ng-bind="vote.users.length"></label>
+								<label data-ng-click="create(resto)" data-ng-show="!alreadyVoted" class="join">Join</label>
 								<div class="clear"></div>
 							</a>
+							<div class="sub-list">
+								<ul>
+									<li data-ng-repeat="user in vote.users" data-ng-bind="user.displayName"></li>
+								</ul>
+							</div>
 						</li>
-						<li data-ng-hide="voteEnabled || alreadyVoted">
-							<div class="button"><a data-ng-click="enableVote()" href="#">Vote</a></div>
+						<li data-ng-show="todayVotes.length < 1">
+							<a href="#">
+								Seems like nobody's eating today
+							</a>
 						</li>
 					</ul>
+					<div data-ng-hide="voteEnabled || alreadyVoted" class="button"><a data-ng-click="enableVote()" href="#">Vote</a></div>
 				</div>
 			</div>
 			<div data-ng-show="voteEnabled">
 				<h3>Choose wisely</h3>
 				<div class="menu_box_list">
-					<ul>
+					<ul class="restos-list">
 						<li data-ng-repeat="resto in restos | filter:search | orderBy:order:(order == 'proximity' || order == 'healthiness')">
-							<a href="#" data-ng-click="create(resto)">
+							<a href="#">
 								<span data-ng-bind="resto.name"></span>
-								<label>Vote that</label>
+								<label data-ng-click="create(resto)" class="join">Vote</label>
 								<div class="clear"></div>
 							</a>
 						</li>
 					</ul>
+					<div class="button"><a data-ng-click="disableVote()" href="#">Back</a></div>
 				</div>
 			</div>
 		</div>

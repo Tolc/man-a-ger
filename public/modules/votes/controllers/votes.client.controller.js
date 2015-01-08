@@ -83,10 +83,14 @@ angular.module('votes').controller('VotesController', ['$scope', '$stateParams',
 		};
 
 		$scope.enableVote = function() {
-			$scope.voteEnabled = true;
 			if ($scope.restos.length <= 0) {
 				$scope.restos = Restos.query();
 			}
+			$scope.voteEnabled = true;
+		};
+
+		$scope.disableVote = function() {
+			$scope.voteEnabled = false;
 		};
 	}
 ]);
