@@ -1,11 +1,20 @@
 'use strict';
 
 // Restos controller
-angular.module('restos').controller('RestosController', ['$scope', '$stateParams', '$location', 'Authentication', 'Restos', 'TodayResto',
-	function($scope, $stateParams, $location, Authentication, Restos, TodayResto) {
+angular.module('restos').controller('RestosController', ['$scope', '$stateParams', '$location', '$cookies', 'Authentication', 'Restos', 'TodayResto',
+	function($scope, $stateParams, $location, $cookies, Authentication, Restos, TodayResto) {
 		$scope.authentication = Authentication;
 		$scope.todayResto = TodayResto.today();
 		$scope.restos = [];
+		var now = new Date();
+		var todayCookieName = 'manger-' + now.getYear() + '-' + now.getMonth() + '-' + now.getDate();
+		if($cookies[todayCookieName] != 'seen-it') {
+			$scope.todayResto.$promise.then(function(data) {
+				console.log($scope.todayResto.$resolved);
+				//$scope.todayResto.views = ($scope.todayResto.views)? $scope.todayResto.views + 1 : 0;
+				Restos.update({restoId: $scope.todayResto._id}, $scope.todayResto);
+			});
+		}
 
 		// Create new Resto
 		$scope.create = function() {

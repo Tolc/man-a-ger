@@ -17,6 +17,10 @@ var PreviousRestoSchema = new Schema({
 	resto: {
 		type: Schema.ObjectId,
 		ref: 'Resto'
+	},
+	views : {
+		type: Number,
+		default: 0
 	}
 });
 

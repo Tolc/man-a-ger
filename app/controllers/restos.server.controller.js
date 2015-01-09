@@ -31,6 +31,7 @@ exports.create = function(req, res) {
  * Show the current Resto
  */
 exports.read = function(req, res) {
+	console.log(req.resto);
 	res.jsonp(req.resto);
 };
 
