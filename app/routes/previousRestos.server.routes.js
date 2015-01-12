@@ -9,6 +9,9 @@ module.exports = function(app) {
 		.get(previousRestos.list)
 		.post(users.hasAuthorization(['admin']), previousRestos.create);
 
+	app.route('/incrementToday')
+		.post(previousRestos.incrementToday);
+
 	app.route('/previousRestos/:previousRestoId')
 		.get(previousRestos.read)
 		.put(users.hasAuthorization(['admin']), previousRestos.hasAuthorization, previousRestos.update)

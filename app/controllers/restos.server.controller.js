@@ -132,7 +132,7 @@ exports.today = function(req, res) {
 			});
 		} else {
 			if(previousResto) {
-				res.jsonp(previousResto.resto);
+				res.jsonp(previousResto);
 			} else {
 				Resto.find().exec(function (err, restos) {
 					if (err) {
@@ -166,7 +166,7 @@ exports.today = function(req, res) {
 									message: errorHandler.getErrorMessage(err)
 								});
 							} else {
-								res.jsonp(todayResto);
+								res.jsonp(previousResto);
 							}
 						});
 						//End of score strategy

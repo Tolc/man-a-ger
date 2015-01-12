@@ -16,7 +16,7 @@ angular.module('restos').factory('Restos', ['$resource',
 	}
 ]);
 
-//Restos service used to communicate Restos REST endpoints
+//TodayResto service used to communicate with TodayResto REST endpoint
 angular.module('restos').factory('TodayResto', ['$resource',
 	function($resource) {
 		return $resource(

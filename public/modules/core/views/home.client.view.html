@@ -28,7 +28,7 @@
 			<div class="articles_list">
 				<ul>
 					<li><a href="#" class="red"><img src="modules/core/images/comments.png" alt="">23</a></li>
-					<li><a href="#" class="purple"><img src="modules/core/images/views.png" alt="">841</a></li>
+					<li><a href="#" class="purple"><img src="modules/core/images/views.png" alt="">{{previousTodayResto.views}}</a></li>
 					<li><a href="#" class="yellow"><img src="modules/core/images/likes.png" alt="">49</a></li>
 					<div class="clear"></div>
 				</ul>
@@ -60,7 +60,7 @@
 							</a>
 						</li>
 					</ul>
-					<div data-ng-hide="voteEnabled || alreadyVoted" class="button"><a data-ng-click="enableVote()" href="#">Vote</a></div>
+					<div data-ng-hide="voteEnabled || alreadyVoted" class="button"><a data-ng-click="enableVote()">Vote</a></div>
 				</div>
 			</div>
 			<div data-ng-show="voteEnabled">
@@ -75,7 +75,7 @@
 							</a>
 						</li>
 					</ul>
-					<div class="button"><a data-ng-click="disableVote()" href="#">Back</a></div>
+					<div class="button"><a data-ng-click="disableVote()">Back</a></div>
 				</div>
 			</div>
 		</div>

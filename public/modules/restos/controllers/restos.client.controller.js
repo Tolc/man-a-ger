@@ -1,19 +1,20 @@
 'use strict';
 
 // Restos controller
-angular.module('restos').controller('RestosController', ['$scope', '$stateParams', '$location', '$cookies', 'Authentication', 'Restos', 'TodayResto',
-	function($scope, $stateParams, $location, $cookies, Authentication, Restos, TodayResto) {
+angular.module('restos').controller('RestosController', ['$scope', '$stateParams', '$location', '$cookies', 'Authentication', 'Restos', 'TodayResto', 'IncrementToday',
+	function($scope, $stateParams, $location, $cookies, Authentication, Restos, TodayResto, IncrementToday) {
 		$scope.authentication = Authentication;
-		$scope.todayResto = TodayResto.today();
+		$scope.previousTodayResto = TodayResto.today();
+		$scope.todayResto = {};
+		$scope.previousTodayResto.$promise.then(function(data) {
+			$scope.todayResto = $scope.previousTodayResto.resto;
+		});
 		$scope.restos = [];
 		var now = new Date();
 		var todayCookieName = 'manger-' + now.getYear() + '-' + now.getMonth() + '-' + now.getDate();
-		if($cookies[todayCookieName] != 'seen-it') {
-			$scope.todayResto.$promise.then(function(data) {
-				console.log($scope.todayResto.$resolved);
-				//$scope.todayResto.views = ($scope.todayResto.views)? $scope.todayResto.views + 1 : 0;
-				Restos.update({restoId: $scope.todayResto._id}, $scope.todayResto);
-			});
+		if($cookies[todayCookieName] !== 'seen-today') {
+			IncrementToday.increment();
+			$cookies[todayCookieName] = 'seen-today';
 		}
 
 		// Create new Resto

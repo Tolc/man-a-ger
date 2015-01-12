@@ -100,8 +100,47 @@ exports.previousRestoByID = function(req, res, next, id) {
  * PreviousResto authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-	if (req.previousResto.user.id !== req.user.id) {
-		return res.status(403).send('User is not authorized');
-	}
+	//if (req.previousResto.user.id !== req.user.id) {
+	//	return res.status(403).send('User is not authorized');
+	//}
 	next();
+};
+
+
+/**
+ * Increment today resto's number of views
+ */
+exports.incrementToday = function(req, res) {
+	var now = new Date();
+	var today = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0);
+	var almostTomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59, 999);
+	PreviousResto.findOne({
+		'created': {
+			'$gte': today,
+			'$lte': almostTomorrow
+		}
+	}).exec(function (err, previousResto) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			if (previousResto) {
+				previousResto.views = previousResto.views + 1;
+				previousResto.save(function(err) {
+					if (err) {
+						return res.status(400).send({
+							message: errorHandler.getErrorMessage(err)
+						});
+					} else {
+						res.jsonp(previousResto);
+					}
+				});
+			} else {
+				return res.status(500).send({
+					message: 'Error when incrementing number of views'
+				});
+			}
+		}
+	});
 };

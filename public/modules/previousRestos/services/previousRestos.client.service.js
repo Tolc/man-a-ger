@@ -11,3 +11,18 @@ angular.module('previousRestos').factory('PreviousRestos', ['$resource',
 		});
 	}
 ]);
+
+//IncrementToday service used to communicate with IncrementToday REST endpoint
+angular.module('previousRestos').factory('IncrementToday', ['$resource',
+	function($resource) {
+		return $resource(
+			'incrementToday',
+			{},
+			{
+				increment: {
+					method: 'POST'
+				}
+			}
+		);
+	}
+]);
