@@ -166,7 +166,9 @@ exports.today = function(req, res) {
 									message: errorHandler.getErrorMessage(err)
 								});
 							} else {
-								res.jsonp(previousResto);
+								//res.jsonp(previousResto);
+								//Recursive call to get resto populated
+								exports.today(req, res);
 							}
 						});
 						//End of score strategy

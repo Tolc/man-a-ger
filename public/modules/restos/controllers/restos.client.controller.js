@@ -8,14 +8,16 @@ angular.module('restos').controller('RestosController', ['$scope', '$stateParams
 		$scope.todayResto = {};
 		$scope.previousTodayResto.$promise.then(function(data) {
 			$scope.todayResto = $scope.previousTodayResto.resto;
+			var now = new Date();
+			var todayCookieName = 'manger-seen-today';
+			var todayCookieValue = $scope.todayResto.name + '-' + now.getYear() + '-' + now.getMonth() + '-' + now.getDate();
+			if($cookies[todayCookieName] !== todayCookieValue) {
+				IncrementToday.increment();
+				$cookies[todayCookieName] = todayCookieValue;
+				$scope.previousTodayResto.views++;
+			}
 		});
 		$scope.restos = [];
-		var now = new Date();
-		var todayCookieName = 'manger-' + now.getYear() + '-' + now.getMonth() + '-' + now.getDate();
-		if($cookies[todayCookieName] !== 'seen-today') {
-			IncrementToday.increment();
-			$cookies[todayCookieName] = 'seen-today';
-		}
 
 		// Create new Resto
 		$scope.create = function() {
