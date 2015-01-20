@@ -1178,13 +1178,22 @@ fieldset#body {
 
 
 .wrap {
-	width: 100%;
+	width: 80%;
 }
 .header {
-	width: 80%;
 	margin: 0 auto;
 }
 
+
+.menu li ul {
+	display: none;
+	width: 25px;
+	position: absolute;
+	background: #394264;
+}
+.menu li:hover ul {
+	display: block;
+}
 
 .grid {
 	margin: 0 0 0 30px;
