@@ -45,7 +45,7 @@
 							<a href="#">
 								<span data-ng-bind="vote.resto.name"></span>
 								<label class="digits" data-ng-bind="vote.users.length"></label>
-								<label data-ng-click="create(resto)" data-ng-show="!alreadyVoted" class="join">Join</label>
+								<label data-ng-click="create(resto)" data-ng-show="!alreadyVoted && authentication.user" class="join">Join</label>
 								<div class="clear"></div>
 							</a>
 							<div class="sub-list">
@@ -60,7 +60,7 @@
 							</a>
 						</li>
 					</ul>
-					<div data-ng-hide="voteEnabled || alreadyVoted" class="button"><a data-ng-click="enableVote()">Vote</a></div>
+					<div data-ng-hide="voteEnabled || alreadyVoted || !authentication.user" class="button"><a data-ng-click="enableVote()">Vote</a></div>
 				</div>
 			</div>
 			<div data-ng-show="voteEnabled">
