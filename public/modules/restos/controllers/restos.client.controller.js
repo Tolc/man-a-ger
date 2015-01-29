@@ -1,8 +1,8 @@
 'use strict';
 
 // Restos controller
-angular.module('restos').controller('RestosController', ['$scope', '$stateParams', '$location', '$cookies', 'Authentication', 'Restos', 'TodayResto', 'IncrementToday',
-	function($scope, $stateParams, $location, $cookies, Authentication, Restos, TodayResto, IncrementToday) {
+angular.module('restos').controller('RestosController', ['$scope', '$stateParams', '$location', '$cookies', 'Authentication', 'Restos', 'TodayResto', 'IncrementToday', '$upload',
+	function($scope, $stateParams, $location, $cookies, Authentication, Restos, TodayResto, IncrementToday, $upload) {
 		$scope.authentication = Authentication;
 		$scope.previousTodayResto = TodayResto.today();
 		$scope.todayResto = {};
@@ -81,5 +81,16 @@ angular.module('restos').controller('RestosController', ['$scope', '$stateParams
 				restoId: $stateParams.restoId
 			});
 		};
+
+        $scope.upload = function($files) {
+            console.log("loooool");
+            console.log($files);
+            $upload.upload({
+                url: 'api/user/uploads',
+                method: 'POST',
+                //data: data, // Any data needed to be submitted along with the files
+                file: $files
+            });
+    }
 	}
 ]);

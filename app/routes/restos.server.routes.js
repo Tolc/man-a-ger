@@ -4,6 +4,13 @@ module.exports = function(app) {
 	var users = require('../../app/controllers/users.server.controller');
 	var restos = require('../../app/controllers/restos.server.controller');
 
+    // Upload
+    var multiparty = require('connect-multiparty');
+    var multipartyMiddleware = multiparty();
+    app.route('/api/user/uploads')
+        .post(multipartyMiddleware, restos.uploadFile);
+
+
 	// Restos Routes
 	app.route('/restos')
 		.get(restos.list)

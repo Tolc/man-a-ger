@@ -32,7 +32,7 @@
                 <div class="form-group">
                     <label class="control-label" for="image">Image</label>
                     <div class="controls">
-                        <input name="image" type="file" data-ng-model="image" id="image" class="form-control" placeholder="Image">
+                        <!--<input name="image" type="file"  data-ng-file-select="" data-ng-model="image" data-ng-file-change="generateThumb(image[0], $files)" data-ng-capture="'camera'|'other'" id="image" class="form-control" accept="image/*">-->
                     </div>
                 </div>
                 <div class="form-group">
@@ -50,4 +50,13 @@
             </fieldset>
         </form>
     </div>
+    <br/>
+    <form name="myForm">
+        <br/>
+        Profile Picture: <input type="file" data-ng-file-select="" data-ng-model="picFile" name="file" accept="image/*"
+                                data-ng-file-change="generateThumb(picFile[0], $files)" required>
+        <i data-ng-show="myForm.file.$error.required">*required</i>
+        <br/>
+        <button data-ng-disabled="!myForm.$valid" data-ng-click="upload(picFile)">Submit</button>
+    </form>
 </section>
