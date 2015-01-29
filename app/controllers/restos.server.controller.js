@@ -7,7 +7,8 @@ var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Resto = mongoose.model('Resto'),
 	PreviousResto = mongoose.model('PreviousResto'),
-	_ = require('lodash');
+	_ = require('lodash'),
+	fs = require('fs');
 
 /**
  * Create a Resto
@@ -186,4 +187,38 @@ exports.uploadFile = function(req, res) {
     var file = req.files.file;
     console.log(file.name);
     console.log(file.type);
+    console.log(file.size);
+    console.log(file.path);
+
+
+	var desiredPath = '/uploads/restos';
+	var dirs = desiredPath.split('/');
+	var newDir = __dirname;
+	for (var i = 0; i < dirs.length; i++) {
+		newDir += dirs[i] + '/';
+		if (!fs.exists(newDir)) {
+			fs.mkdir(newDir, function(error) {
+				console.log(error);
+			})
+		}
+	}
+
+
+	fs.readFile(file.path, function (err, data) {
+		var newPath = __dirname + '/../../uploads/restos/' + file.name;
+		console.log(newPath);
+		fs.writeFile(newPath, data, function (err) {
+			if (err) {
+				console.log(err);
+				return res.status(400).send({
+					message: errorHandler.getErrorMessage(err)
+				});
+			} else {
+				var jsonObject = {
+					path: newPath
+				};
+				res.jsonp(jsonObject);
+			}
+		});
+	});
 }
