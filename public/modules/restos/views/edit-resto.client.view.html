@@ -3,6 +3,7 @@
         <h1>Edit Resto</h1>
     </div>
     <div class="col-md-12">
+        <img style="float: right; width: 300px;" data-ng-src="{{resto.image}}">
         <form name="restoForm" class="form-horizontal" data-ng-submit="update()" novalidate>
             <fieldset>
                 <div class="form-group" ng-class="{ 'has-error': restoForm.name.$dirty && restoForm.name.$invalid }">
@@ -29,12 +30,12 @@
                         <input name="price" type="number" step="0.5" size="3" min="0" data-ng-model="resto.price" id="price" class="form-control" placeholder="Price" required>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="control-label" for="image">Image</label>
-                    <div class="controls">
-                        <input name="image" type="file" data-ng-model="resto.image" id="image" class="form-control" placeholder="Image">
-                    </div>
-                </div>
+                <!--<div class="form-group">-->
+                    <!--<label class="control-label" for="image">Image</label>-->
+                    <!--<div class="controls">-->
+                        <!--<input name="image" type="file" data-ng-model="resto.image" id="image" class="form-control" placeholder="Image">-->
+                    <!--</div>-->
+                <!--</div>-->
                 <div class="form-group">
                     <label class="control-label" for="description">Description</label>
                     <div class="controls">
@@ -48,6 +49,16 @@
 					<strong data-ng-bind="error"></strong>
 				</div>
             </fieldset>
+        </form>
+        <br/>
+        <form name="myForm" style="float: right;">
+            <br/>
+            Image: <input type="file" data-ng-file-select="" data-ng-model="picFile" name="file" accept="image/*"
+                                    data-ng-file-change="generateThumb(picFile[0])" required>
+            <i data-ng-show="myForm.file.$error.required">*required</i>
+            <br/>
+            <img style="width: 50px;" data-ng-show="picFile[0].dataUrl != null" data-ng-src="{{picFile[0].dataUrl}}" class="thumb">
+            <button data-ng-disabled="!myForm.$valid" data-ng-click="upload(picFile)">Submit</button>
         </form>
     </div>
 </section>

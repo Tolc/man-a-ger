@@ -1,8 +1,8 @@
 'use strict';
 
 // Restos controller
-angular.module('restos').controller('RestosController', ['$scope', '$stateParams', '$location', '$cookies', 'Authentication', 'Restos', 'TodayResto', 'IncrementToday', '$upload',
-	function($scope, $stateParams, $location, $cookies, Authentication, Restos, TodayResto, IncrementToday, $upload) {
+angular.module('restos').controller('RestosController', ['$scope', '$stateParams', '$location', '$cookies', 'Authentication', 'Restos', 'TodayResto', 'IncrementToday', '$upload', '$timeout',
+	function($scope, $stateParams, $location, $cookies, Authentication, Restos, TodayResto, IncrementToday, $upload, $timeout) {
 		$scope.authentication = Authentication;
 		$scope.previousTodayResto = TodayResto.today();
 		$scope.todayResto = {};
@@ -83,14 +83,41 @@ angular.module('restos').controller('RestosController', ['$scope', '$stateParams
 		};
 
         $scope.upload = function($files) {
-            console.log("loooool");
-            console.log($files);
+            //console.log($files);
             $upload.upload({
-                url: 'api/user/uploads',
+                url: 'restos/upload-pic/' + $scope.resto._id,
                 method: 'POST',
-                //data: data, // Any data needed to be submitted along with the files
+                //data: {
+                //    resto: $scope.resto
+                //}, // Any data needed to be submitted along with the files
                 file: $files
+            }).progress(function(evt) {
+                console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total) + '% file :'+ evt.config.file.name);
+            }).success(function(data, status, headers, config) {
+                //console.log('file ' + config.file.name + 'is uploaded successfully. Response: ' + data);
+                console.log(data);
+                $scope.resto = data;
+                $location.path('restos/' + $scope.resto._id + '/edit');
+            }).error(function(err) {
+                console.log('error');
             });
-    }
+        };
+
+        $scope.fileReaderSupported = window.FileReader != null && (window.FileAPI == null || FileAPI.html5 != false);
+        $scope.generateThumb = function(file) {
+            if (file != null) {
+                if ($scope.fileReaderSupported && file.type.indexOf('image') > -1) {
+                    $timeout(function() {
+                        var fileReader = new FileReader();
+                        fileReader.readAsDataURL(file);
+                        fileReader.onload = function(e) {
+                            $timeout(function() {
+                                file.dataUrl = e.target.result;
+                            });
+                        }
+                    });
+                }
+            }
+        }
 	}
 ]);

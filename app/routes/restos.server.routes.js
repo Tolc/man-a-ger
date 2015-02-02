@@ -7,9 +7,8 @@ module.exports = function(app) {
     // Upload
     var multiparty = require('connect-multiparty');
     var multipartyMiddleware = multiparty();
-    app.route('/api/user/uploads')
-        .post(multipartyMiddleware, restos.uploadFile);
-
+    app.route('/restos/upload-pic/:restoId')
+        .post(users.hasAuthorization(['admin']), multipartyMiddleware, restos.uploadPic);
 
 	// Restos Routes
 	app.route('/restos')
