@@ -32,7 +32,6 @@ exports.create = function(req, res) {
  * Show the current Resto
  */
 exports.read = function(req, res) {
-	console.log(req.resto);
 	res.jsonp(req.resto);
 };
 
@@ -195,7 +194,7 @@ exports.uploadPic = function(req, res) {
     //console.log(file.path);
 
 
-    uploadHandler.storeFile('restos', file, resto._id, function(uploadPath, err) {
+    uploadHandler.storeFile('restos', file, resto._id, resto.image, function(uploadPath, err) {
         if (err) {
             return res.status(500).send({
                 message: errorHandler.getErrorMessage(err)

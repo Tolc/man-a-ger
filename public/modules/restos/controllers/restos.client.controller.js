@@ -95,9 +95,7 @@ angular.module('restos').controller('RestosController', ['$scope', '$stateParams
                 console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total) + '% file :'+ evt.config.file.name);
             }).success(function(data, status, headers, config) {
                 //console.log('file ' + config.file.name + 'is uploaded successfully. Response: ' + data);
-                console.log(data);
                 $scope.resto = data;
-                $location.path('restos/' + $scope.resto._id + '/edit');
             }).error(function(err) {
                 console.log('error');
             });
