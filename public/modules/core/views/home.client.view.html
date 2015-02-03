@@ -42,10 +42,10 @@
 				<div class="menu_box_list">
 					<ul class="votes-list">
 						<li data-ng-repeat="vote in todayVotes">
-							<a href="#">
+							<a>
 								<span data-ng-bind="vote.resto.name"></span>
 								<label class="digits" data-ng-bind="vote.users.length"></label>
-								<label data-ng-click="create(resto)" data-ng-show="!alreadyVoted && authentication.user" class="join">Join</label>
+								<label data-ng-click="create(vote.resto)" data-ng-show="!alreadyVoted && authentication.user" class="join">Join</label>
 								<div class="clear"></div>
 							</a>
 							<div class="sub-list">
@@ -55,7 +55,7 @@
 							</div>
 						</li>
 						<li data-ng-show="todayVotes.length < 1">
-							<a href="#">
+							<a>
 								Seems like nobody's eating today
 							</a>
 						</li>

@@ -27,16 +27,11 @@ angular.module('votes').controller('VotesController', ['$scope', '$stateParams',
 				resto: resto._id
 			});
 
-			// Redirect after save
 			vote.$save(function(response) {
-				//$location.path('votes/' + response._id);
 				$scope.success = 'Votre vote pour ' + resto.name + ' a été pris en compte.';
 				$scope.alreadyVoted = true;
 				$scope.todayVotes = TodayVotes.todayVotes();
 				$scope.voteEnabled = false;
-
-				// Clear form fields
-				//$scope.name = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
