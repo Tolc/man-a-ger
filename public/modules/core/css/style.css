@@ -1184,6 +1184,13 @@ fieldset#body {
 	margin: 0 auto;
 }
 
+.column_middle_right, .column_left_middle {
+    float: left;
+    width: 62.6%;
+}
+.column_middle_right {
+    margin: 0 0 0 6%;
+}
 
 .menu > ul {
 	float: left;
@@ -1262,4 +1269,17 @@ fieldset#body {
 }
 .grid.vote .menu_box_list li:hover .sub-list {
 	display: block;
+}
+
+
+.list-item {
+    width: 31.3%;
+    float: left;
+    margin: 0 0 30px 0;
+}
+.list-item:nth-child(3n+2) {
+    margin: 0 3%;
+}
+.list-item img {
+    height: 150px;
 }
