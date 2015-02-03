@@ -54,7 +54,12 @@ var UserSchema = new Schema({
 		required: 'Please fill in a username',
 		trim: true
 	},
-	password: {
+    image: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    password: {
 		type: String,
 		default: '',
 		validate: [validateLocalStrategyPassword, 'Password should be longer']

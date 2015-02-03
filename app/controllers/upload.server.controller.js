@@ -30,7 +30,7 @@ var getRealPathToStoreFile = function(uploadType, fileName) {
         newDir += dirs[i] + '/';
         if (!fs.exists(newDir)) {
             fs.mkdir(newDir, function(err) {
-                if (err.code !== 'EEXIST') {
+                if (err && (err.code !== 'EEXIST')) {
                     console.log(err);
                 }
             })
@@ -93,7 +93,7 @@ exports.storeFile = function(uploadType, file, fileName, previousFilePath, callb
             var uploadPath = getPublicPath(uploadType, realName);
 
             //Delete previously used file
-            if (uploadPath !== previousFilePath) {
+            if (previousFilePath && (uploadPath !== previousFilePath)) {
                 exports.deleteFile(previousFilePath);
             }
 

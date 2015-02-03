@@ -162,6 +162,8 @@ fieldset#body {
 	-moz-border-radius:3em;
 	-o-border-radius:3em;
 	border:3px solid #50597b;
+    width: 45px;
+    height: 45px;
 }
 /********* Main ************/
 .main{

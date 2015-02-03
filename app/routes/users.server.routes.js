@@ -9,6 +9,12 @@ module.exports = function(app) {
 	// User Routes
 	var users = require('../../app/controllers/users.server.controller');
 
+    // Upload
+    var multiparty = require('connect-multiparty');
+    var multipartyMiddleware = multiparty();
+    app.route('/users/me/upload-pic')
+        .post(multipartyMiddleware, users.uploadPic);
+
 	// Setting up the users profile api
 	app.route('/users/me').get(users.me);
 	app.route('/users').put(users.update);

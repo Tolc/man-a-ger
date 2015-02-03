@@ -5,6 +5,7 @@
  */
 var _ = require('lodash'),
 	errorHandler = require('../errors.server.controller.js'),
+    uploadHandler = require('../upload.server.controller'),
 	mongoose = require('mongoose'),
 	passport = require('passport'),
 	User = mongoose.model('User');
@@ -53,4 +54,30 @@ exports.update = function(req, res) {
  */
 exports.me = function(req, res) {
 	res.json(req.user || null);
+};
+
+
+exports.uploadPic = function(req, res) {
+    var user = req.user;
+
+    var file = req.files.file;
+
+    uploadHandler.storeFile('users', file, user.username, user.image, function(uploadPath, err) {
+        if (err) {
+            return res.status(500).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            user.image = uploadPath;
+            user.save(function(err) {
+                if (err) {
+                    return res.status(500).send({
+                        message: errorHandler.getErrorMessage(err)
+                    });
+                } else {
+                    res.jsonp(user);
+                }
+            });
+        }
+    });
 };

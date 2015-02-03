@@ -212,4 +212,4 @@ exports.uploadPic = function(req, res) {
             });
         }
     });
-}
+};

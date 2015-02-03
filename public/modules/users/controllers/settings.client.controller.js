@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('users').controller('SettingsController', ['$scope', '$http', '$location', 'Users', 'Authentication',
-	function($scope, $http, $location, Users, Authentication) {
+angular.module('users').controller('SettingsController', ['$scope', '$http', '$location', 'Users', 'Authentication', '$upload', '$timeout',
+	function($scope, $http, $location, Users, Authentication,  $upload, $timeout) {
 		$scope.user = Authentication.user;
 
 		// If user is not signed in then redirect back home
@@ -67,5 +67,42 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 				$scope.error = response.message;
 			});
 		};
+
+
+        $scope.upload = function($files) {
+            //console.log($files);
+            $upload.upload({
+                url: 'users/me/upload-pic',
+                method: 'POST',
+                //data: {
+                //    resto: $scope.resto
+                //}, // Any data needed to be submitted along with the files
+                file: $files
+            }).progress(function(evt) {
+                console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total) + '% file :'+ evt.config.file.name);
+            }).success(function(data, status, headers, config) {
+                //console.log('file ' + config.file.name + 'is uploaded successfully. Response: ' + data);
+                $scope.user = data;
+            }).error(function(err) {
+                console.log('error');
+            });
+        };
+
+        $scope.fileReaderSupported = window.FileReader != null && (window.FileAPI == null || FileAPI.html5 != false);
+        $scope.generateThumb = function(file) {
+            if (file != null) {
+                if ($scope.fileReaderSupported && file.type.indexOf('image') > -1) {
+                    $timeout(function() {
+                        var fileReader = new FileReader();
+                        fileReader.readAsDataURL(file);
+                        fileReader.onload = function(e) {
+                            $timeout(function() {
+                                file.dataUrl = e.target.result;
+                            });
+                        }
+                    });
+                }
+            }
+        }
 	}
 ]);
