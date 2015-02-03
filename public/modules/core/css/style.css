@@ -1271,7 +1271,7 @@ fieldset#body {
 	display: block;
 }
 
-
+/******* List item *******/
 .list-item {
     width: 31.3%;
     float: left;
@@ -1280,6 +1280,87 @@ fieldset#body {
 .list-item:nth-child(3n+2) {
     margin: 0 3%;
 }
-.list-item img {
+.list-item .image img {
     height: 150px;
+}
+
+.list-item h3 {
+    color: #FFF;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    padding:15px 0;
+    text-align: center;
+    background:#cc324b;
+    border-radius: 5px 5px 0 0;
+    -webkit-border-radius: 5px 5px 0 0;
+    -moz-border-radius: 5px 5px 0 0;
+    -o-border-radius: 5px 5px 0 0;
+}
+.list-item h3 i img {
+    vertical-align:middle;
+}
+.list-item .image {
+    padding:1em 0;
+    background:#e64c65;
+    text-align:center;
+}
+.list-item .data {
+    background: #394264;
+    border-radius: 0 0 5px 5px;
+    -webkit-border-radius: 0 0 5px 5px;
+    -moz-border-radius: 0 0 5px 5px;
+    -o-border-radius: 0 0 5px 5px;
+}
+.list-item .data li a {
+    display:block;
+    color:#9099B7;
+    font-size:1em;
+    text-transform:uppercase;
+    border-bottom:1px solid #1f253d;
+    padding: 20px 25px 15px 25px;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+.list-item .data li a span{
+    color:#FFF;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+.list-item .data li a:hover span,
+.list-item .data li.active a span{
+    color:#e64c65;
+}
+.list-item .data li a:hover,
+.list-item .dat li.active a{
+    background:#50597b;
+}
+.list-item .data li a label {
+    color: #FFF;
+    font-size: 1em;
+    float: right;
+    letter-spacing:1px;
+}
+.list-item .data li a label em{
+    font-size:0.5em;
+    vertical-align:top;
+}
+.list-item .data li a label i > img{
+    vertical-align: middle;
+    margin-top: -5px;
+}
+.menu_box_list li.no-link {
+    padding: 20px 30px;
+    border-bottom: 1px solid #1f253d;
+    font-family: ambleregular;
+}
+.menu_box_list li.no-link input,
+.menu_box_list li.no-link select {
+    height: 26px;
+    width: 100%;
+    font-size: 1em;
+    font-family: ambleregular;
 }
