@@ -68,7 +68,8 @@
                          <input type="file" data-ng-file-select="" data-ng-model="picFile" name="file" accept="image/*"
                                   data-ng-file-change="generateThumb(picFile[0])" required>
                     </label>
-                    <input type="submit" data-ng-disabled="!pictureForm.$valid" data-ng-click="upload(picFile)" value="Submit image">
+                    <input type="submit" class="submit-user-file" data-ng-disabled="!pictureForm.$valid"
+                           data-ng-click="upload(picFile)" value="Submit image">
                     <!--<i data-ng-show="pictureForm.file.$error.required">*required</i>-->
                 </form>
                 <div class="upload" data-ng-show="picFile[0].progress >= 0">

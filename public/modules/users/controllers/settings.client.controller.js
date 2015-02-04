@@ -79,10 +79,13 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
                 //}, // Any data needed to be submitted along with the files
                 file: $files
             }).progress(function(evt) {
-                console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total) + '% file :'+ evt.config.file.name);
+                $scope.picFile[0].progress = parseInt(100.0 * evt.loaded / evt.total);
             }).success(function(data, status, headers, config) {
                 //console.log('file ' + config.file.name + 'is uploaded successfully. Response: ' + data);
                 $scope.user = data;
+                setTimeout(function(){
+                    $scope.picFile[0].progress = 0;
+                },3000)
             }).error(function(err) {
                 console.log('error');
             });

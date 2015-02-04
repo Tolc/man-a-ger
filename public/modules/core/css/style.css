@@ -1480,6 +1480,10 @@ input[type="password"] {
     font-family: 'ambleregular';
 }
 
+input.submit-user-file {
+    margin-top: 30px;
+}
+
 .fileContainer {
     overflow: hidden;
     position: relative;
