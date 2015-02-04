@@ -32,7 +32,10 @@
 			<header-login></header-login>
 
 			<div class="profile_img">
-				<a href="#"><img data-ng-src="{{authentication.user.image}}" alt="">	</a>
+				<a href="/#!/settings/profile">
+                    <img data-ng-show="authentication.user.image" data-ng-src="{{authentication.user.image}}">
+                    <img data-ng-hide="authentication.user.image" data-ng-src="modules/core/img/users/default.jpg">
+                </a>
 			</div>
 			<div class="clear"></div>
 		</div>

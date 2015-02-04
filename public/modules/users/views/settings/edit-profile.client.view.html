@@ -2,53 +2,84 @@
     <div class="column_left">
         <div class="menu_box">
             <h3>Edit your profile</h3>
+            <div class="menu_box_list">
+                <div class="profile_picture">
+                    <a>
+                        <img class="pic" data-ng-show="user.image" data-ng-src="{{user.image}}">
+                        <img class="pic" data-ng-hide="user.image" data-ng-src="modules/core/img/users/default.jpg">
+                    </a>
+                    <div class="profile_picture_name">
+                        <h2 data-ng-bind="user.username"></h2>
+                        <p data-ng-bind="user.displayName"></p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="column_middle_right">
-        <div class="tweets">
+    <div class="column_middle">
+        <div class="box blue">
             <h3>My profile</h3>
-            <div class="tweets_list">
-                <form name="userForm" data-ng-submit="updateUserProfile(userForm.$valid)" class="signin form-horizontal" autocomplete="off">
-                    <fieldset>
-                        <div class="form-group">
-                            <label for="firstName">First Name</label>
-                            <input type="text" id="firstName" name="firstName" class="form-control" data-ng-model="user.firstName" placeholder="First Name">
-                        </div>
-                        <div class="form-group">
-                            <label for="lastName">Last Name</label>
-                            <input type="text" id="lastName" name="lastName" class="form-control" data-ng-model="user.lastName" placeholder="Last Name">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" class="form-control" data-ng-model="user.email" placeholder="Email">
-                        </div>
-                        <div class="form-group">
-                            <label for="username">Username</label>
-                            <input type="text" id="username" name="username" class="form-control" data-ng-model="user.username" placeholder="Username">
-                        </div>
-                        <div class="text-center form-group">
-                            <button type="submit" class="btn btn-large btn-primary">Save Profile</button>
-                        </div>
-                        <div data-ng-show="success" class="text-center text-success">
-                            <strong>Profile Saved Successfully</strong>
-                        </div>
-                        <div data-ng-show="error" class="text-center text-danger">
-                            <strong data-ng-bind="error"></strong>
-                        </div>
-                    </fieldset>
+            <div class="box-content">
+                <form name="userForm" data-ng-submit="updateUserProfile(userForm.$valid)" autocomplete="off">
+                    <span>
+                         <i>First Name</i>
+                         <input type="text" id="firstName" name="firstName" class="form-control" data-ng-model="user.firstName" placeholder="First Name">
+                    </span>
+                    <span>
+                         <i>Last Name</i>
+                         <input type="text" id="lastName" name="lastName" class="form-control" data-ng-model="user.lastName" placeholder="Last Name">
+                    </span>
+                    <span>
+                         <i>Email</i>
+                         <input type="email" id="email" name="email" class="form-control" data-ng-model="user.email" placeholder="Email">
+                    </span>
+                    <span>
+                         <i>Username</i>
+                         <input type="text" id="username" name="username" class="form-control" data-ng-model="user.username" placeholder="Username">
+                    </span>
+                    <input type="submit" class="my_button" value="Save profile">
+                    <div data-ng-show="success" class="text-center text-success">
+                        <strong>Profile Saved Successfully</strong>
+                    </div>
+                    <div data-ng-show="error" class="text-center text-danger">
+                        <strong data-ng-bind="error"></strong>
+                    </div>
                 </form>
+            </div>
+        </div>
+    </div>
 
-                <form name="pictureForm" style="float: right;">
-                    <img data-ng-src="{{user.image}}">
-                    <br/>
-                    Image: <input type="file" data-ng-file-select="" data-ng-model="picFile" name="file" accept="image/*"
+    <div class="column_right">
+        <div class="box blue">
+            <h3>My profile picture</h3>
+            <div class="box-content">
+                <div class="profile_picture" data-ng-show="picFile[0].dataUrl != null">
+                    <a>
+                        <img class="pic" data-ng-src="{{picFile[0].dataUrl}}">
+                    </a>
+                    <div class="profile_picture_name">
+                        <p data-ng-bind="picFile[0].name"></p>
+                    </div>
+                </div>
+                <form name="pictureForm">
+                    <label class="fileContainer">
+                        Choose an image
+                         <input type="file" data-ng-file-select="" data-ng-model="picFile" name="file" accept="image/*"
                                   data-ng-file-change="generateThumb(picFile[0])" required>
-                    <i data-ng-show="pictureForm.file.$error.required">*required</i>
-                    <br/>
-                    <img style="width: 50px;" data-ng-show="picFile[0].dataUrl != null" data-ng-src="{{picFile[0].dataUrl}}" class="thumb">
-                    <button data-ng-disabled="!pictureForm.$valid" data-ng-click="upload(picFile)">Submit image</button>
+                    </label>
+                    <input type="submit" data-ng-disabled="!pictureForm.$valid" data-ng-click="upload(picFile)" value="Submit image">
+                    <!--<i data-ng-show="pictureForm.file.$error.required">*required</i>-->
                 </form>
+                <div class="upload" data-ng-show="picFile[0].progress >= 0">
+                    <div class="progress">
+                        <div class="progress-bar uploading" style="width:{{picFile[0].progress}}%"> </div>
+                    </div>
+                    <div>
+                        <p class="downloading"><i><img src="modules/core/images/upload.png" alt=""></i> Uploading...</p>
+                        <p class="percentage">{{picFile[0].progress}}<em>%</em></p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
