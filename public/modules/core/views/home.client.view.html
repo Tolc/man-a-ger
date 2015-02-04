@@ -17,7 +17,10 @@
 	<div class="column_middle">
 		<div class="grid column_middle_grid1" data-ng-controller="RestosController">
 			<div class="profile_picture">
-				<a href=""><img src="modules/core/img/brand/logo.jpg" alt="logo">	</a>
+				<a data-ng-href="#!/restos/{{resto._id}}">
+                    <img data-ng-hide="todayResto.image" src="modules/core/img/brand/logo.jpg" alt="logo">
+                    <img data-ng-show="todayResto.image" data-ng-src="{{todayResto.image}}" alt="logo">
+                </a>
 				<div class="profile_picture_name">
 					<h2>{{todayResto.name}}</h2>
 					<h2 ng-hide="todayResto">Todays resto is still unknown</h2>
@@ -81,44 +84,3 @@
 		</div>
 	</div>
 </section>
-
-	<!--<div data-ng-controller="VotesController">-->
-		<!--<div data-ng-show="success" data-ng-bind="success"></div>-->
-		<!--<h2 data-ng-hide="voteEnabled || alreadyVoted">Not pleased with that? <a class="btn btn-primary btn-lg" data-ng-click="enableVote()">Call for a vote choice instead!</a></h2>-->
-		<!--<div data-ng-show="voteEnabled && !alreadyVoted" class="row">-->
-			<!--<div class="col-md-4">-->
-				<!--<h3>The choice is yours</h3>-->
-				<!--<p>Search: <input data-ng-model="search" type="text" placeholder="M'eat me, frites, ..."></p>-->
-				<!--<p>-->
-					<!--Sort by:-->
-					<!--<select ng-model="order">-->
-						<!--<option value="">Choose the criteria...</option>-->
-						<!--<option value="name">Alphabetical</option>-->
-						<!--<option value="healthiness">Healthiness</option>-->
-						<!--<option value="proximity">Proximity</option>-->
-						<!--<option value="price">Price</option>-->
-					<!--</select>-->
-				<!--</p>-->
-			<!--</div>-->
-			<!--<div class="col-md-8 list-group">-->
-				<!--<a data-ng-repeat="resto in restos | filter:search | orderBy:order:(order == 'proximity' || order == 'healthiness')" data-ng-click="create(resto)" class="list-group-item">-->
-					<!--<h4 class="list-group-item-heading" data-ng-bind="resto.name"></h4>-->
-				<!--</a>-->
-			<!--</div>-->
-		<!--</div>-->
-		<!--<div data-ng-show="todayVotes.length > 0" class="row">-->
-			<!--<h2>Today's other votes</h2>-->
-			<!--<div data-ng-repeat="vote in todayVotes" class="col-md-3">-->
-				<!--<h2 data-ng-bind="vote.resto.name"></h2>-->
-				<!--<p data-ng-bind="vote.users.length"></p>-->
-				<!--<ul>-->
-					<!--<li data-ng-repeat="voteUser in vote.users">-->
-						<!--{{voteUser.displayName}}-->
-					<!--</li>-->
-				<!--</ul>-->
-				<!--<a class="btn btn-primary btn-lg" data-ng-hide="alreadyVoted" data-ng-click="create(vote.resto)">Vote for that too</a>-->
-			<!--</div>-->
-		<!--</div>-->
-	<!--</div>-->
-	<!--<br>Enjoy &amp; Keep Us Updated,-->
-	<!--<br>thcoq@smile.fr-->
