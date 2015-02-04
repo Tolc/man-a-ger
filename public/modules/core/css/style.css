@@ -1302,9 +1302,10 @@ fieldset#body {
     vertical-align:middle;
 }
 .list-item .image {
-    padding:1em 0;
+    padding: 0;
     background:#e64c65;
     text-align:center;
+    height: 150px;
 }
 .list-item .data {
     background: #394264;
