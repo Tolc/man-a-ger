@@ -1,41 +1,66 @@
-<section class="row" data-ng-controller="AuthenticationController">
-	<h3 class="col-md-12 text-center">Sign in using your social accounts</h3>
-	<div class="col-md-12 text-center">
-		<a href="/auth/facebook" class="undecorated-link">
-			<img src="/modules/users/img/buttons/facebook.png">
-		</a>
-		<a href="/auth/twitter" class="undecorated-link">
-			<img src="/modules/users/img/buttons/twitter.png">
-		</a>
-		<a href="/auth/google" class="undecorated-link">
-			<img src="/modules/users/img/buttons/google.png">
-		</a>
-		<a href="/auth/linkedin" class="undecorated-link">
-			<img src="/modules/users/img/buttons/linkedin.png">
-		</a>
-		<a href="/auth/github" class="undecorated-link">
-			<img src="/modules/users/img/buttons/github.png">
-		</a>
-	</div>
-	<h3 class="col-md-12 text-center">Or with your account</h3>
-	<div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2">
+<section class="sign-in-up" data-ng-controller="AuthenticationController">
+	<!--<h3 class="col-md-12 text-center">Sign in using your social accounts</h3>-->
+	<!--<div class="col-md-12 text-center">-->
+		<!--<a href="/auth/facebook" class="undecorated-link">-->
+			<!--<img src="/modules/users/img/buttons/facebook.png">-->
+		<!--</a>-->
+		<!--<a href="/auth/twitter" class="undecorated-link">-->
+			<!--<img src="/modules/users/img/buttons/twitter.png">-->
+		<!--</a>-->
+		<!--<a href="/auth/google" class="undecorated-link">-->
+			<!--<img src="/modules/users/img/buttons/google.png">-->
+		<!--</a>-->
+		<!--<a href="/auth/linkedin" class="undecorated-link">-->
+			<!--<img src="/modules/users/img/buttons/linkedin.png">-->
+		<!--</a>-->
+		<!--<a href="/auth/github" class="undecorated-link">-->
+			<!--<img src="/modules/users/img/buttons/github.png">-->
+		<!--</a>-->
+	<!--</div>-->
+	<!--<h3 class="col-md-12 text-center">Or with your account</h3>-->
+
+    <div class="column_middle">
+        <div class="column_right_grid sign-in">
+            <div class="sign_in">
+                <h3>Sign in to your account</h3>
+                <form data-ng-submit="signin()">
+					    	<span>
+					 	        <i><img src="modules/core/images/mail.png" alt=""></i>
+                                <input type="text" id="username" name="username"
+                                       data-ng-model="credentials.username" placeholder="Username">
+					 	    </span>
+					 	    <span>
+                                 <i><img src="modules/core/images/lock.png" alt=""></i>
+                                 <input type="password" id="password" name="password"
+                                        data-ng-model="credentials.password" placeholder="Password">
+					 	    </span>
+                    <input type="submit" class="my-button" value="Sign In">
+                </form>
+                <h4><a href="/#!/password/forgot">Forgot your password?</a></h4>
+            </div>
+            <!--<div class="signin_facebook">-->
+                <!--<p><a href="#">  <i> <img src="modules/core/images/facebook.png" alt=""></i>Sign in with facebook</a></p>-->
+            <!--</div>-->
+        </div>
+
+
 		<form data-ng-submit="signin()" class="signin form-horizontal" autocomplete="off">
 			<fieldset>
-				<div class="form-group">
-					<label for="username">Username</label>
-					<input type="text" id="username" name="username" class="form-control" data-ng-model="credentials.username" placeholder="Username">
-				</div>
-				<div class="form-group">
-					<label for="password">Password</label>
-					<input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password" placeholder="Password">
-				</div>
+				<!--<div class="form-group">-->
+					<!--<label for="username">Username</label>-->
+					<!--<input type="text" id="username" name="username" class="form-control" data-ng-model="credentials.username" placeholder="Username">-->
+				<!--</div>-->
+				<!--<div class="form-group">-->
+					<!--<label for="password">Password</label>-->
+					<!--<input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password" placeholder="Password">-->
+				<!--</div>-->
 				<div class="text-center form-group">
-					<button type="submit" class="btn btn-primary">Sign in</button>&nbsp; or&nbsp;
+					<!--<button type="submit" class="btn btn-primary">Sign in</button>&nbsp; or&nbsp;-->
 					<a href="/#!/signup">Sign up</a>
 				</div>
-				<div class="forgot-password">
-					<a href="/#!/password/forgot">Forgot your password?</a>
-				</div>
+				<!--<div class="forgot-password">-->
+					<!--<a href="/#!/password/forgot">Forgot your password?</a>-->
+				<!--</div>-->
 				<div data-ng-show="error" class="text-center text-danger">
 					<strong data-ng-bind="error"></strong>
 				</div>

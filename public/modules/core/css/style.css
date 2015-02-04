@@ -1569,3 +1569,9 @@ input.submit-user-file {
     vertical-align: middle;
     margin-top: -5px;
 }
+
+/** Authentication **/
+.sign-in-up .column_middle {
+    margin: 0 auto;
+    float: none;
+}
