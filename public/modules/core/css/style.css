@@ -1524,3 +1524,48 @@ input.submit-user-file {
 .fileContainer [type=file] {
     cursor: pointer;
 }
+
+
+.box .box-content.data {
+    padding: 0;
+    background: #394264;
+    border-radius: 0 0 5px 5px;
+    -webkit-border-radius: 0 0 5px 5px;
+    -moz-border-radius: 0 0 5px 5px;
+    -o-border-radius: 0 0 5px 5px;
+    text-align: left;
+}
+.box .data li {
+    display:block;
+    color:#9099B7;
+    font-size:1em;
+    text-transform:uppercase;
+    border-bottom:1px solid #1f253d;
+    padding: 20px 25px 15px 25px;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+.box .data li:hover span,
+.box .data li.active span {
+    color:#e64c65;
+}
+.box .data li:hover,
+.box .data li.active {
+    background:#50597b;
+}
+.box .data li label {
+    color: #FFF;
+    font-size: 1em;
+    float: right;
+    letter-spacing:1px;
+}
+.box .data li label em{
+    font-size:0.5em;
+    vertical-align:top;
+}
+.box .data li label i > img{
+    vertical-align: middle;
+    margin-top: -5px;
+}
