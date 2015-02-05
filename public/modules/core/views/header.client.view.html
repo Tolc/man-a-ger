@@ -41,16 +41,8 @@
 		</div>
 
 		<div class="profile_details" data-ng-hide="authentication.user">
-			<ul class="nav navbar-nav navbar-right">
-				<li ui-route="/signup" ng-class="{active: $uiRoute}">
-					<a href="/#!/signup">Sign Up</a>
-				</li>
-				<li class="divider-vertical"></li>
-				<li ui-route="/signin" ng-class="{active: $uiRoute}">
-					<a href="/#!/signin">Sign In</a>
-				</li>
-			</ul>
-			<div class="clear"></div>
+            <div class="button sign-in-button"><a href="/#!/signin">Sign In</a></div>
+            <div class="button sign-up-button"><a href="/#!/signup">Sign Up</a></div>
 		</div>
 
 

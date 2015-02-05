@@ -1,6 +1,6 @@
 <section data-ng-controller="RestosController" data-ng-init="findOne()">
     <div class="column_left">
-        <div class="box" data-ng-show="((authentication.user) && (authentication.user._id == resto.user._id))">
+        <div class="box" data-ng-show="((authentication.user) && (authentication.user.roles.indexOf('admin') > -1))">
             <div class="articles_list">
                 <ul>
                     <li><a data-ng-click="remove()" class="red"><img src="modules/core/images/comments.png">Delete</a></li>

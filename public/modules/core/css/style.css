@@ -1284,6 +1284,10 @@ fieldset#body {
 }
 .list-item .image img {
     height: 150px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
 }
 
 .list-item h3 {
@@ -1631,5 +1635,24 @@ input.submit-user-file {
     background: #e64c65;
 }
 .sign-in-up .column_middle .sign-in-up-separator .button.sign-in-button a:hover {
+    background: #d4465d;
+}
+
+
+/** Header **/
+.profile_details .button {
+    float: left;
+    margin-left: 10px;
+}
+.profile_details .button.sign-in-button a {
+    background: #11a8ab;
+}
+.profile_details .button.sign-in-button a:hover {
+    background: #0D9092;
+}
+.profile_details .button.sign-up-button a {
+    background: #e64c65;
+}
+.profile_details .button.sign-up-button a:hover {
     background: #d4465d;
 }
