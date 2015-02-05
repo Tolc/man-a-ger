@@ -20,8 +20,8 @@
 	<!--<h3 class="col-md-12 text-center">Or with your email</h3>-->
 
     <div class="column_middle">
-        <div class="column_right_grid sign-in">
-            <div class="sign_in">
+        <div class="sign-in">
+            <div class="sign_up">
                 <h3>Sign up on the man-a-ger</h3>
                 <form name="userForm" data-ng-submit="signup()">
                     <span>
@@ -40,7 +40,7 @@
                                data-ng-model="credentials.email" placeholder="Email">
                     </span>
                     <span>
-                        <i><img src="modules/core/images/mail.png" alt=""></i>
+                        <i>Username</i>
                         <input type="text" id="username" name="username"
                                data-ng-model="credentials.username" placeholder="Username">
                     </span>
@@ -51,42 +51,17 @@
                     </span>
                     <input type="submit" class="my-button" value="Sign Up">
                 </form>
+                <div class="sign-in-up-separator">
+                    or
+                    <div class="button sign-in-button"><a href="/#!/signin">Sign In</a></div>
+                </div>
+                <div data-ng-show="error" class="text-center text-danger">
+                    <strong data-ng-bind="error"></strong>
+                </div>
             </div>
             <!--<div class="signin_facebook">-->
             <!--<p><a href="#">  <i> <img src="modules/core/images/facebook.png" alt=""></i>Sign in with facebook</a></p>-->
             <!--</div>-->
         </div>
-
-        <form name="userForm" data-ng-submit="signup()" class="signin form-horizontal" novalidate autocomplete="off">
-            <fieldset>
-                <!--<div class="form-group">-->
-                    <!--<label for="firstName">First Name</label>-->
-                    <!--<input type="text" required id="firstName" name="firstName" class="form-control" data-ng-model="credentials.firstName" placeholder="First Name">-->
-                <!--</div>-->
-                <!--<div class="form-group">-->
-                    <!--<label for="lastName">Last Name</label>-->
-                    <!--<input type="text" id="lastName" name="lastName" class="form-control" data-ng-model="credentials.lastName" placeholder="Last Name">-->
-                <!--</div>-->
-                <!--<div class="form-group">-->
-                    <!--<label for="email">Email</label>-->
-                    <!--<input type="email" id="email" name="email" class="form-control" data-ng-model="credentials.email" placeholder="Email">-->
-                <!--</div>-->
-                <!--<div class="form-group">-->
-                    <!--<label for="username">Username</label>-->
-                    <!--<input type="text" id="username" name="username" class="form-control" data-ng-model="credentials.username" placeholder="Username">-->
-                <!--</div>-->
-                <!--<div class="form-group">-->
-                    <!--<label for="password">Password</label>-->
-                    <!--<input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password" placeholder="Password">-->
-                <!--</div>-->
-                <div class="text-center form-group">
-                    <!--<button type="submit" class="btn btn-large btn-primary">Sign up</button>&nbsp; or&nbsp;-->
-                    <a href="/#!/signin" class="show-signup">Sign in</a>
-                </div>
-                <div data-ng-show="error" class="text-center text-danger">
-                    <strong data-ng-bind="error"></strong>
-                </div>
-            </fieldset>
-        </form>
     </div>
 </section>

@@ -1575,3 +1575,61 @@ input.submit-user-file {
     margin: 0 auto;
     float: none;
 }
+
+.sign-in-up .column_middle .sign-in{
+    background:#394264;
+    text-align:center;
+    padding:2em 0;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+.sign-in-up .column_middle .sign-in h3{
+    color: #FFF;
+    font-size: 1.2em;
+    text-transform: uppercase;
+}
+.sign-in-up .column_middle .sign-in span{
+    background:#50597b;
+    border:1px solid #1F253D;
+    padding:5px 0;
+    margin:25px 25px;
+    border-radius:5px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    -o-border-radius:5px;
+    display:block;
+    outline:none;
+    transition: border-color 0.3s;
+    -o-transition: border-color 0.3s;
+    -ms-transition: border-color 0.3s;
+    -moz-transition: border-color 0.3s;
+    -webkit-transition: border-color 0.3s;
+}
+.sign-in-up .column_middle .sign-in span:hover{
+    border:1px solid #11A8AB;
+}
+.sign-in-up .column_middle .sign-in span i img{
+    vertical-align:middle;
+}
+
+.sign-in-up .column_middle .sign-in-up-separator {
+    margin-top: 40px;
+}
+.sign-in-up .column_middle .sign-in-up-separator .button {
+    margin-top: 10px;
+}
+.sign-in-up .column_middle .sign-in-up-separator .button.sign-up-button a {
+    background: #11a8ab;
+}
+.sign-in-up .column_middle .sign-in-up-separator .button.sign-up-button a:hover,
+.sign-in-up .column_middle .sign_up input[type="submit"]:hover {
+    background: #0D9092;
+}
+.sign-in-up .column_middle .sign-in-up-separator .button.sign-in-button a {
+    background: #e64c65;
+}
+.sign-in-up .column_middle .sign-in-up-separator .button.sign-in-button a:hover {
+    background: #d4465d;
+}
