@@ -77,6 +77,9 @@ angular.module('restos').controller('RestosController', ['$scope', '$stateParams
 
 		// Find existing Resto
 		$scope.findOne = function() {
+            if (!$stateParams.restoId) {
+                $location.path('restos');
+            }
 			$scope.resto = Restos.get({ 
 				restoId: $stateParams.restoId
 			});
