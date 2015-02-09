@@ -5,9 +5,8 @@ module.exports = function(app) {
 	var stats = require('../../app/controllers/stats.server.controller');
 
 	// Stats Routes
-	//app.route('/stats')
-	//	.get(stats.list)
-	//	.post(users.requiresLogin, stats.create);
+	app.route('/stats/last-year-votes')
+		.get(stats.getLastYearVotes);
     //
 	//app.route('/stats/:statId')
 	//	.get(stats.read)

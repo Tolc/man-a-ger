@@ -5,10 +5,24 @@
  */
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
-	//Stat = mongoose.model('Stat'),
+    Vote = mongoose.model('Vote'),
 	_ = require('lodash');
 
 
+
+exports.getLastYearVotes = function(req, res) {
+    var now = new Date();
+    var oneYearAgo = new Date(now.getFullYear() - 1, now.getMonth(), now.getDate(), 0, 0, 0, 0);
+    Vote.find({'created': {'$gte': oneYearAgo}, 'users': req.user._id}).populate('resto').exec(function (err, lastYearVotes) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.jsonp(lastYearVotes);
+        }
+    });
+};
 
 /**
  * Stat authorization middleware

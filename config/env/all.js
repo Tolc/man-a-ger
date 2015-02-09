@@ -30,7 +30,8 @@ module.exports = {
 				'public/lib/ng-file-upload/angular-file-upload.js',
 				'public/modules/core/js/jquery.js',
 				'public/modules/core/js/jquery.easing.js',
-				'public/modules/core/js/jquery.ulslide.js'
+				'public/modules/core/js/jquery.ulslide.js',
+				'public/modules/core/js/Chart.js'
 			]
 		},
 		css: [

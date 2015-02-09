@@ -1,17 +1,26 @@
-<section data-ng-controller="StatsController" data-ng-init="findOne()">
+<section data-ng-controller="StatsController">
     <div class="column_left">
         <div class="menu_box">
             <h3>Stats</h3>
-            <div class="menu_box_list">
-                <div class="profile_picture">
-                    <a>
-                        <img class="pic" data-ng-show="user.image" data-ng-src="{{user.image}}">
-                        <img class="pic" data-ng-hide="user.image" data-ng-src="modules/core/img/users/default.jpg">
-                    </a>
-                    <div class="profile_picture_name">
-                        <h2 data-ng-bind="user.username"></h2>
-                        <p data-ng-bind="user.displayName"></p>
-                    </div>
+            <div class="chart">
+                <div class="diagram">
+                    <canvas id="canvas" height="220" width="220"> </canvas>
+                    <h4><span>June</span><br />2013</h4>
+                </div>
+                <div class="week-month-year">
+                    <p><a href="#">Year</a></p>
+                    <p><a href="#" class="active">Month</a></p>
+                    <p><a href="#">Week</a></p>
+                    <div class="clear"></div>
+                </div>
+                <div class="chart_list">
+                    <ul>
+                        <li><a href="#" class="red">ios<p class="percentage">21<em>%</em></p></a></li>
+                        <li><a href="#" class="purple">Mac<p class="percentage">48<em>%</em></p></a></li>
+                        <li><a href="#" class="yellow">Linux<p class="percentage">9<em>%</em></p></a></li>
+                        <li><a href="#" class="blue">Win<p class="percentage">32<em>%</em></p></a></li>
+                        <div class="clear"></div>
+                    </ul>
                 </div>
             </div>
         </div>
