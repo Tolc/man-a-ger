@@ -8,17 +8,16 @@
                     <h4><span>June</span><br />2013</h4>
                 </div>
                 <div class="week-month-year">
-                    <p><a href="#">Year</a></p>
-                    <p><a href="#" class="active">Month</a></p>
-                    <p><a href="#">Week</a></p>
+                    <p><a data-ng-click="setTimeYear()" class="{{(time === 'year')? 'active' : ''}}">Year</a></p>
+                    <p><a data-ng-click="setTimeMonth()" class="{{(time === 'month')? 'active' : ''}}">Month</a></p>
+                    <p><a data-ng-click="setTimeWeek()" class="{{(time === 'week')? 'active' : ''}}">Week</a></p>
                     <div class="clear"></div>
                 </div>
                 <div class="chart_list">
                     <ul>
-                        <li><a href="#" class="red">ios<p class="percentage">21<em>%</em></p></a></li>
-                        <li><a href="#" class="purple">Mac<p class="percentage">48<em>%</em></p></a></li>
-                        <li><a href="#" class="yellow">Linux<p class="percentage">9<em>%</em></p></a></li>
-                        <li><a href="#" class="blue">Win<p class="percentage">32<em>%</em></p></a></li>
+                        <li data-ng-repeat="votesStats in yearVotesStats">
+                            <a href="#!/restos/{{votesStats.resto._id}}" class="{{votesStats.class}}">{{votesStats.resto.name}}<p class="percentage">{{votesStats.perc}}<em>%</em></p></a>
+                        </li>
                         <div class="clear"></div>
                     </ul>
                 </div>
