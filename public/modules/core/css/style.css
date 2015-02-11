@@ -1656,3 +1656,7 @@ input.submit-user-file {
 .profile_details .button.sign-up-button a:hover {
     background: #d4465d;
 }
+
+.angular-google-map-container {
+    height: 400px;
+}

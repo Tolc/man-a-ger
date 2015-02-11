@@ -42,6 +42,24 @@
                         <textarea name="description" data-ng-model="resto.description" id="description" class="form-control" cols="30" rows="10" placeholder="Description"></textarea>
                     </div>
                 </div>
+                <div class="form-group" ng-class="{ 'has-error': restoForm.address.$dirty && restoForm.address.$invalid }">
+                    <label class="control-label" for="address">Address</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="resto.address" id="address" class="form-control" placeholder="Address" required>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error': restoForm.lat.$dirty && restoForm.lat.$invalid }">
+                    <label class="control-label" for="lat">Latitude</label>
+                    <div class="controls">
+                        <input name="lat" type="number" step="0.001" size="3" min="-85" max="85" data-ng-model="resto.lat" id="lat" class="form-control" placeholder="lat" required>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error': restoForm.lng.$dirty && restoForm.lng.$invalid }">
+                    <label class="control-label" for="lng">Longitude</label>
+                    <div class="controls">
+                        <input name="lng" type="number" step="0.001" size="3" min="-180" max="180" data-ng-model="resto.lng" id="lng" class="form-control" placeholder="lng" required>
+                    </div>
+                </div>
                 <div class="form-group">
                     <input type="submit" value="Update" class="btn btn-default">
                 </div>

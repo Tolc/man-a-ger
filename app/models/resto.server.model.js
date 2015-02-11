@@ -53,7 +53,22 @@ var RestoSchema = new Schema({
 		type: String,
 		default: '',
 		trim: true
-	}
+	},
+    address: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    lat: {
+        type: Number,
+        min: -85,
+        max: 85
+    },
+    lng: {
+        type: Number,
+        min: -180,
+        max: 180
+    }
 });
 
 mongoose.model('Resto', RestoSchema);

@@ -1,8 +1,9 @@
 'use strict';
 
 // Restos controller
-angular.module('restos').controller('RestosController', ['$scope', '$stateParams', '$location', '$cookies', 'Authentication', 'Restos', 'TodayResto', 'IncrementToday', '$upload', '$timeout',
-	function($scope, $stateParams, $location, $cookies, Authentication, Restos, TodayResto, IncrementToday, $upload, $timeout) {
+angular.module('restos').controller('RestosController', ['$scope', '$stateParams', '$location', '$cookies', 'Authentication',
+    'Restos', 'TodayResto', 'IncrementToday', '$upload', '$timeout', 'uiGmapGoogleMapApi',
+	function($scope, $stateParams, $location, $cookies, Authentication, Restos, TodayResto, IncrementToday, $upload, $timeout, uiGmapGoogleMapApi) {
 		$scope.authentication = Authentication;
 		$scope.previousTodayResto = TodayResto.today();
 		$scope.todayResto = {};
@@ -28,7 +29,8 @@ angular.module('restos').controller('RestosController', ['$scope', '$stateParams
 				healthiness: this.healthiness,
 				price: this.price,
 				image: this.image,
-				description: this.description
+				description: this.description,
+                address: this.address
 			});
 
 			// Redirect after save
@@ -83,6 +85,24 @@ angular.module('restos').controller('RestosController', ['$scope', '$stateParams
 			$scope.resto = Restos.get({ 
 				restoId: $stateParams.restoId
 			});
+            $scope.resto.$promise.then( function(data) {
+                if ($scope.resto.lat && $scope.resto.lng) {
+                    $scope.map = {
+                        center: {
+                            latitude: $scope.resto.lat,
+                            longitude: $scope.resto.lng
+                        },
+                        zoom: 15
+                    };
+                    $scope.marker = {
+                        coords: {
+                            latitude: $scope.resto.lat,
+                            longitude: $scope.resto.lng
+                        },
+                        id: $scope.resto._id
+                    };
+                }
+            });
 		};
 
         $scope.upload = function($files) {
@@ -119,6 +139,13 @@ angular.module('restos').controller('RestosController', ['$scope', '$stateParams
                     });
                 }
             }
-        }
+        };
+
+        // uiGmapGoogleMapApi is a promise.
+        // The "then" callback function provides the google.maps object.
+        //uiGmapGoogleMapApi.then(function(maps) {
+        //    alert('LOL');
+        //});
+
 	}
 ]);
