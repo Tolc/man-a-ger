@@ -103,5 +103,21 @@ angular.module('stats').controller('StatsController', ['$scope', '$stateParams',
             updateVotesStats();
         };
 
+
+
+        var lineChartData = {
+            labels : ["Apr","May","Jun"],
+            datasets : [
+                {
+                    fillColor : "rgba(255, 255, 255, 0)",
+                    strokeColor : "#FFF",
+                    pointColor : "#11a8ab",
+                    pointStrokeColor : "#FFF",
+                    data : [7, 8.49, 6.33]
+                }
+            ]
+        };
+        var myLine = new Chart(document.getElementById("line-chart").getContext("2d")).Line(lineChartData);
+
 	}
 ]);

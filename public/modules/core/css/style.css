@@ -1574,6 +1574,9 @@ input.submit-user-file {
     vertical-align: middle;
     margin-top: -5px;
 }
+.angular-google-map-container {
+    height: 400px;
+}
 
 /** Authentication **/
 .sign-in-up .column_middle {
@@ -1658,6 +1661,24 @@ input.submit-user-file {
     background: #d4465d;
 }
 
-.angular-google-map-container {
-    height: 400px;
+/** Stats **/
+.menu_box .chart {
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -o-border-radius: 0;
+}
+.box .graph {
+    margin: 0;
+}
+.box .graph canvas {
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -o-border-radius: 0;
+}
+.box .graph .week-month-year {
+    margin: 0;
 }

@@ -1,7 +1,7 @@
 <section data-ng-controller="StatsController">
     <div class="column_left">
         <div class="menu_box">
-            <h3>Stats</h3>
+            <h3>My stats</h3>
             <div class="chart">
                 <div class="diagram">
                     <canvas id="canvas" height="220" width="220"> </canvas>
@@ -27,69 +27,25 @@
 
     <div class="column_middle">
         <div class="box blue">
-            <h3>My profile</h3>
-            <div class="box-content">
-                <form name="userForm" data-ng-submit="updateUserProfile(userForm.$valid)" autocomplete="off">
-                    <span>
-                         <i>First Name</i>
-                         <input type="text" id="firstName" name="firstName" class="form-control" data-ng-model="user.firstName" placeholder="First Name">
-                    </span>
-                    <span>
-                         <i>Last Name</i>
-                         <input type="text" id="lastName" name="lastName" class="form-control" data-ng-model="user.lastName" placeholder="Last Name">
-                    </span>
-                    <span>
-                         <i>Email</i>
-                         <input type="email" id="email" name="email" class="form-control" data-ng-model="user.email" placeholder="Email">
-                    </span>
-                    <span>
-                         <i>Username</i>
-                         <input type="text" id="username" name="username" class="form-control" data-ng-model="user.username" placeholder="Username">
-                    </span>
-                    <input type="submit" class="my_button" value="Save profile">
-                    <div data-ng-show="success" class="text-center text-success">
-                        <strong>Profile Saved Successfully</strong>
+            <h3>Averages</h3>
+            <div class="graph">
+                <canvas id="line-chart"></canvas>
+                <div class="graph_list">
+                    <div class="week-month-year">
+                        <p><a href="#">Year</a></p>
+                        <p><a href="#" class="active">Month</a></p>
+                        <p><a href="#">Week</a></p>
+                        <div class="clear"></div>
                     </div>
-                    <div data-ng-show="error" class="text-center text-danger">
-                        <strong data-ng-bind="error"></strong>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
 
     <div class="column_right">
         <div class="box blue">
-            <h3>My profile picture</h3>
-            <div class="box-content">
-                <div class="profile_picture" data-ng-show="picFile[0].dataUrl != null">
-                    <a>
-                        <img class="pic" data-ng-src="{{picFile[0].dataUrl}}">
-                    </a>
-                    <div class="profile_picture_name">
-                        <p data-ng-bind="picFile[0].name"></p>
-                    </div>
-                </div>
-                <form name="pictureForm">
-                    <label class="fileContainer">
-                        Choose an image
-                        <input type="file" data-ng-file-select="" data-ng-model="picFile" name="file" accept="image/*"
-                               data-ng-file-change="generateThumb(picFile[0])" required>
-                    </label>
-                    <input type="submit" class="submit-user-file" data-ng-disabled="!pictureForm.$valid"
-                           data-ng-click="upload(picFile)" value="Submit image">
-                    <!--<i data-ng-show="pictureForm.file.$error.required">*required</i>-->
-                </form>
-                <div class="upload" data-ng-show="picFile[0].progress >= 0">
-                    <div class="progress">
-                        <div class="progress-bar uploading" style="width:{{picFile[0].progress}}%"> </div>
-                    </div>
-                    <div>
-                        <p class="downloading"><i><img src="modules/core/images/upload.png" alt=""></i> Uploading...</p>
-                        <p class="percentage">{{picFile[0].progress}}<em>%</em></p>
-                    </div>
-                </div>
-            </div>
+            <h3>Where the hell did I eat on that day?</h3>
+            <div class="cal1"></div>
         </div>
     </div>
 </section>
