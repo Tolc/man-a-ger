@@ -5,12 +5,12 @@
             <div class="chart">
                 <div class="diagram">
                     <canvas id="canvas" height="220" width="220"> </canvas>
-                    <h4><span>June</span><br />2013</h4>
+                    <!--<h4><span>June</span><br />2013</h4>-->
                 </div>
                 <div class="week-month-year">
-                    <p><a data-ng-click="setTimeYear()" class="{{(time === 'year')? 'active' : ''}}">Year</a></p>
-                    <p><a data-ng-click="setTimeMonth()" class="{{(time === 'month')? 'active' : ''}}">Month</a></p>
-                    <p><a data-ng-click="setTimeWeek()" class="{{(time === 'week')? 'active' : ''}}">Week</a></p>
+                    <p><a data-ng-click="setTimeYear()" ng-class="{active: time === 'year'}">Year</a></p>
+                    <p><a data-ng-click="setTimeMonth()" ng-class="{active: time === 'month'}">Month</a></p>
+                    <p><a data-ng-click="setTimeWeek()" ng-class="{active: time === 'week'}">Week</a></p>
                     <div class="clear"></div>
                 </div>
                 <div class="chart_list">
@@ -29,12 +29,15 @@
         <div class="box blue">
             <h3>Averages</h3>
             <div class="graph">
-                <canvas id="line-chart"></canvas>
+                <div class="graph-bg">
+                    <canvas id="line-chart"></canvas>
+                    <div class="legend"></div>
+                </div>
                 <div class="graph_list">
                     <div class="week-month-year">
-                        <p><a href="#">Year</a></p>
-                        <p><a href="#" class="active">Month</a></p>
-                        <p><a href="#">Week</a></p>
+                        <p><a data-ng-click="setTimeYear()" ng-class="{active: time === 'year'}">Year</a></p>
+                        <p><a data-ng-click="setTimeMonth()" ng-class="{active: time === 'month'}">Month</a></p>
+                        <p><a data-ng-click="setTimeWeek()" ng-class="{active: time === 'week'}">Week</a></p>
                         <div class="clear"></div>
                     </div>
                 </div>

@@ -1673,11 +1673,18 @@ input.submit-user-file {
 .box .graph {
     margin: 0;
 }
+.box .graph .graph-bg {
+    background: #11a8ab;
+    padding: 20px;
+}
 .box .graph canvas {
+    padding: 0;
+    background: none;
     border-radius: 0;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     -o-border-radius: 0;
+    margin: 0 auto;
 }
 .box .graph .week-month-year {
     margin: 0;

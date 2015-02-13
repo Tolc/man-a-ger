@@ -12,6 +12,7 @@ angular.module('stats').controller('StatsController', ['$scope', '$stateParams',
 
         $scope.lastYearVotes.$promise.then(function(data) {
             updateVotesStats();
+            updateAvgStats();
         });
 
         var updateVotesStats = function() {
@@ -87,37 +88,135 @@ angular.module('stats').controller('StatsController', ['$scope', '$stateParams',
                 });
                 $scope.yearVotesStats.push(yearVotesSortedStats[key]);
             });
-            var myDoughnut = new Chart(document.getElementById("canvas").getContext("2d")).Doughnut(doughnutData);
+            var options = {
+                percentageInnerCutout : 60,
+                segmentShowStroke: false
+            };
+            var myDoughnut = new Chart(document.getElementById("canvas").getContext("2d")).Doughnut(doughnutData, options);
         };
 
         $scope.setTimeWeek = function() {
             $scope.time = 'week';
             updateVotesStats();
+            updateAvgStats();
         };
         $scope.setTimeMonth = function() {
             $scope.time = 'month';
             updateVotesStats();
+            updateAvgStats();
         };
         $scope.setTimeYear = function() {
             $scope.time = 'year';
             updateVotesStats();
+            updateAvgStats();
         };
 
 
 
-        var lineChartData = {
-            labels : ["Apr","May","Jun"],
-            datasets : [
-                {
-                    fillColor : "rgba(255, 255, 255, 0)",
-                    strokeColor : "#FFF",
-                    pointColor : "#11a8ab",
-                    pointStrokeColor : "#FFF",
-                    data : [7, 8.49, 6.33]
+        var updateAvgStats = function() {
+            var currentTimeAvgs = [];
+            var dateToCompare = new Date();
+            if ($scope.time === 'month') {
+                dateToCompare = new Date(dateToCompare.getFullYear(), dateToCompare.getMonth() - 1, dateToCompare.getDate(), 0, 0, 0, 0);
+            } else if($scope.time === 'week') {
+                dateToCompare = new Date(dateToCompare.getFullYear(), dateToCompare.getMonth(), dateToCompare.getDate() - 7, 0, 0, 0, 0);
+            }
+            for (var i = 0; i < $scope.lastYearVotes.length; i++) {
+                var vote = $scope.lastYearVotes[i];
+                var toCount = true;
+                var voteDate = new Date(vote.created);
+                if ($scope.time !== 'year') {
+                    toCount = voteDate > dateToCompare;
                 }
-            ]
+                if (toCount) {
+                    if ($scope.time === 'year') {
+                        var label = moment(voteDate).format('MMM YY');
+                        if (currentTimeAvgs[label] === undefined) {
+                            currentTimeAvgs[label] = {
+                                totalVotes: 1,
+                                health: vote.resto.healthiness,
+                                price: vote.resto.price,
+                                prox: vote.resto.proximity
+                            };
+                        } else {
+                            currentTimeAvgs[label].health += vote.resto.healthiness;
+                            currentTimeAvgs[label].price += vote.resto.price;
+                            currentTimeAvgs[label].prox += vote.resto.proximity;
+                            currentTimeAvgs[label].totalVotes += 1;
+                        }
+                    } else if ($scope.time === 'month') {
+
+                    } else if ($scope.time === 'week') {
+
+                    }
+
+                }
+            }
+            var labels = [];
+            var dataHealth = [];
+            var dataPrice = [];
+            var dataProx = [];
+            Object.keys(currentTimeAvgs).forEach(function(key, index) {
+                var totalVotes = currentTimeAvgs[key].totalVotes;
+                currentTimeAvgs[key].health = Math.round(currentTimeAvgs[key].health / totalVotes);
+                currentTimeAvgs[key].price = Math.round(currentTimeAvgs[key].price / totalVotes);
+                currentTimeAvgs[key].prox = Math.round(currentTimeAvgs[key].prox / totalVotes);
+                labels.push(key);
+                dataHealth.push(currentTimeAvgs[key].health);
+                dataPrice.push(currentTimeAvgs[key].price);
+                dataProx.push(currentTimeAvgs[key].prox);
+            });
+            console.log(dataHealth);
+            console.log(dataPrice);
+            console.log(dataProx);
+
+            var lineChartData = {
+                labels : labels,
+                datasets : [
+                    {
+                        label: "Healthiness",
+                        fillColor : "rgba(255, 255, 255, 0)",
+                        strokeColor : "#FFF",
+                        pointColor : "#11a8ab",
+                        pointStrokeColor : "#FFF",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(220,220,220,1)",
+                        data : dataHealth
+                    },
+                    {
+                        label: "Price",
+                        fillColor : "rgba(255, 255, 255, 0)",
+                        strokeColor : "#666",
+                        pointColor : "#666",
+                        pointStrokeColor : "#666",
+                        pointHighlightFill: "#666",
+                        pointHighlightStroke: "#666",
+                        data : dataPrice
+                    },
+                    {
+                        label: "Proximity",
+                        fillColor : "rgba(255, 255, 255, 0)",
+                        strokeColor : "#FFF",
+                        pointColor : "#11a8ab",
+                        pointStrokeColor : "#FFF",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(220,220,220,1)",
+                        data : dataProx
+                    }
+                ]
+            };
+            var options = {
+                scaleBeginAtZero: true,
+                pointDotStrokeWidth : 2,
+                scaleGridLineWidth : 2,
+                scaleLineColor: "rgba(0,0,0,0)",
+                scaleFontColor: "#fff"
+            };
+            var myLine = new Chart(document.getElementById("line-chart").getContext("2d")).Line(lineChartData, options);
+            var legend = myLine.generateLegend();
+            $('.legend').html(legend);
+
         };
-        var myLine = new Chart(document.getElementById("line-chart").getContext("2d")).Line(lineChartData);
 
 	}
 ]);
