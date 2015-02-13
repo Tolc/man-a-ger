@@ -30,6 +30,7 @@ module.exports = {
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
 				'public/lib/ng-file-upload/angular-file-upload-shim.js',
 				'public/lib/ng-file-upload/angular-file-upload.js',
+				'public/lib/moment/moment.js',
 				'public/modules/core/js/jquery.js',
 				'public/modules/core/js/jquery.easing.js',
 				'public/modules/core/js/jquery.ulslide.js',
