@@ -115,9 +115,17 @@ angular.module('stats').controller('StatsController', ['$scope', '$stateParams',
 
         var updateAvgStats = function() {
             var currentTimeAvgs = [];
+            var now = new Date();
             var dateToCompare = new Date();
+            var monthTable = [];
             if ($scope.time === 'month') {
                 dateToCompare = new Date(dateToCompare.getFullYear(), dateToCompare.getMonth() - 1, dateToCompare.getDate(), 0, 0, 0, 0);
+                monthTable.push(dateToCompare);
+                monthTable.push(new Date(dateToCompare.getFullYear(), dateToCompare.getMonth(), dateToCompare.getDate() + 7, 0, 0, 0, 0));
+                monthTable.push(new Date(dateToCompare.getFullYear(), dateToCompare.getMonth(), dateToCompare.getDate() + 14, 0, 0, 0, 0));
+                monthTable.push(new Date(dateToCompare.getFullYear(), dateToCompare.getMonth(), dateToCompare.getDate() + 21, 0, 0, 0, 0));
+                monthTable.push(new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59, 999));
+                console.log(monthTable);
             } else if($scope.time === 'week') {
                 dateToCompare = new Date(dateToCompare.getFullYear(), dateToCompare.getMonth(), dateToCompare.getDate() - 7, 0, 0, 0, 0);
             }
@@ -129,27 +137,31 @@ angular.module('stats').controller('StatsController', ['$scope', '$stateParams',
                     toCount = voteDate > dateToCompare;
                 }
                 if (toCount) {
-                    if ($scope.time === 'year') {
-                        var label = moment(voteDate).format('MMM YY');
-                        if (currentTimeAvgs[label] === undefined) {
-                            currentTimeAvgs[label] = {
-                                totalVotes: 1,
-                                health: vote.resto.healthiness,
-                                price: vote.resto.price,
-                                prox: vote.resto.proximity
-                            };
-                        } else {
-                            currentTimeAvgs[label].health += vote.resto.healthiness;
-                            currentTimeAvgs[label].price += vote.resto.price;
-                            currentTimeAvgs[label].prox += vote.resto.proximity;
-                            currentTimeAvgs[label].totalVotes += 1;
+                    var label = moment(voteDate).format('MMM YY');
+                    if ($scope.time === 'month') {
+                        for (var j = 0; j < monthTable.length - 2; j++) {
+                            if (voteDate >= monthTable[j] && voteDate < monthTable[j + 1]) {
+                                label = moment(monthTable[j]).format('DD MMM') + ' - ' + moment(monthTable[j + 1]).format('DD MMM');
+                                break;
+                            }
                         }
-                    } else if ($scope.time === 'month') {
-
                     } else if ($scope.time === 'week') {
-
+                        label = moment(voteDate).format('dd DD');
                     }
 
+                    if (currentTimeAvgs[label] === undefined) {
+                        currentTimeAvgs[label] = {
+                            totalVotes: 1,
+                            health: vote.resto.healthiness,
+                            price: vote.resto.price,
+                            prox: vote.resto.proximity
+                        };
+                    } else {
+                        currentTimeAvgs[label].health += vote.resto.healthiness;
+                        currentTimeAvgs[label].price += vote.resto.price;
+                        currentTimeAvgs[label].prox += vote.resto.proximity;
+                        currentTimeAvgs[label].totalVotes += 1;
+                    }
                 }
             }
             var labels = [];
@@ -158,9 +170,9 @@ angular.module('stats').controller('StatsController', ['$scope', '$stateParams',
             var dataProx = [];
             Object.keys(currentTimeAvgs).forEach(function(key, index) {
                 var totalVotes = currentTimeAvgs[key].totalVotes;
-                currentTimeAvgs[key].health = Math.round(currentTimeAvgs[key].health / totalVotes);
-                currentTimeAvgs[key].price = Math.round(currentTimeAvgs[key].price / totalVotes);
-                currentTimeAvgs[key].prox = Math.round(currentTimeAvgs[key].prox / totalVotes);
+                currentTimeAvgs[key].health = currentTimeAvgs[key].health / totalVotes;
+                currentTimeAvgs[key].price = currentTimeAvgs[key].price / totalVotes;
+                currentTimeAvgs[key].prox = currentTimeAvgs[key].prox / totalVotes;
                 labels.push(key);
                 dataHealth.push(currentTimeAvgs[key].health);
                 dataPrice.push(currentTimeAvgs[key].price);
@@ -176,30 +188,33 @@ angular.module('stats').controller('StatsController', ['$scope', '$stateParams',
                     {
                         label: "Healthiness",
                         fillColor : "rgba(255, 255, 255, 0)",
-                        strokeColor : "#FFF",
-                        pointColor : "#11a8ab",
-                        pointStrokeColor : "#FFF",
-                        pointHighlightFill: "#fff",
+                        strokeColor : "#50597b",
+                        //pointColor : "#11a8ab",
+                        pointColor : "#50597b",
+                        pointStrokeColor : "#50597b",
+                        pointHighlightFill: "#50597b",
                         pointHighlightStroke: "rgba(220,220,220,1)",
                         data : dataHealth
                     },
                     {
                         label: "Price",
                         fillColor : "rgba(255, 255, 255, 0)",
-                        strokeColor : "#666",
-                        pointColor : "#666",
-                        pointStrokeColor : "#666",
-                        pointHighlightFill: "#666",
-                        pointHighlightStroke: "#666",
+                        strokeColor : "#e64c65",
+                        //pointColor : "#11a8ab",
+                        pointColor : "#e64c65",
+                        pointStrokeColor : "#e64c65",
+                        pointHighlightFill: "#e64c65",
+                        pointHighlightStroke: "rgba(220,220,220,1)",
                         data : dataPrice
                     },
                     {
                         label: "Proximity",
                         fillColor : "rgba(255, 255, 255, 0)",
-                        strokeColor : "#FFF",
-                        pointColor : "#11a8ab",
-                        pointStrokeColor : "#FFF",
-                        pointHighlightFill: "#fff",
+                        strokeColor : "#fcb150",
+                        //pointColor : "#11a8ab",
+                        pointColor : "#fcb150",
+                        pointStrokeColor : "#fcb150",
+                        pointHighlightFill: "#fcb150",
                         pointHighlightStroke: "rgba(220,220,220,1)",
                         data : dataProx
                     }
@@ -210,8 +225,12 @@ angular.module('stats').controller('StatsController', ['$scope', '$stateParams',
                 pointDotStrokeWidth : 2,
                 scaleGridLineWidth : 2,
                 scaleLineColor: "rgba(0,0,0,0)",
-                scaleFontColor: "#fff"
+                scaleFontColor: "#fff",
+                multiTooltipTemplate: "<%if (datasetLabel){%><%=datasetLabel%>: <%}%><%= value %>"
             };
+            var canvasParent = $('.graph-bg');
+            $('canvas', canvasParent).remove();
+            canvasParent.append('<canvas id="line-chart"></canvas>');
             var myLine = new Chart(document.getElementById("line-chart").getContext("2d")).Line(lineChartData, options);
             var legend = myLine.generateLegend();
             $('.legend').html(legend);
