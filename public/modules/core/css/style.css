@@ -1689,3 +1689,14 @@ input.submit-user-file {
 .box .graph .week-month-year {
     margin: 0;
 }
+.box .graph .legend{
+    margin: 0 auto;
+    width: 50%;
+    padding-top: 20px;
+}
+.box .graph .legend .square {
+    width: 15px;
+    height: 15px;
+    float: left;
+    margin: 2px 10px 0 0;
+}

@@ -6,6 +6,8 @@ angular.module('stats').controller('StatsController', ['$scope', '$stateParams',
 		$scope.authentication = Authentication;
         $scope.lastYearVotes = LastYearVotes.getVotes();
 
+        $scope.noDataVotes = false;
+        $scope.noDataAvg = false;
         $scope.time = 'year';
 
         $scope.yearVotesStats = [];
@@ -93,6 +95,7 @@ angular.module('stats').controller('StatsController', ['$scope', '$stateParams',
                 segmentShowStroke: false
             };
             var myDoughnut = new Chart(document.getElementById("canvas").getContext("2d")).Doughnut(doughnutData, options);
+            $scope.noDataVotes = doughnutData.length < 1;
         };
 
         $scope.setTimeWeek = function() {
@@ -125,7 +128,6 @@ angular.module('stats').controller('StatsController', ['$scope', '$stateParams',
                 monthTable.push(new Date(dateToCompare.getFullYear(), dateToCompare.getMonth(), dateToCompare.getDate() + 14, 0, 0, 0, 0));
                 monthTable.push(new Date(dateToCompare.getFullYear(), dateToCompare.getMonth(), dateToCompare.getDate() + 21, 0, 0, 0, 0));
                 monthTable.push(new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59, 999));
-                console.log(monthTable);
             } else if($scope.time === 'week') {
                 dateToCompare = new Date(dateToCompare.getFullYear(), dateToCompare.getMonth(), dateToCompare.getDate() - 7, 0, 0, 0, 0);
             }
@@ -178,9 +180,6 @@ angular.module('stats').controller('StatsController', ['$scope', '$stateParams',
                 dataPrice.push(currentTimeAvgs[key].price);
                 dataProx.push(currentTimeAvgs[key].prox);
             });
-            console.log(dataHealth);
-            console.log(dataPrice);
-            console.log(dataProx);
 
             var lineChartData = {
                 labels : labels,
@@ -226,14 +225,17 @@ angular.module('stats').controller('StatsController', ['$scope', '$stateParams',
                 scaleGridLineWidth : 2,
                 scaleLineColor: "rgba(0,0,0,0)",
                 scaleFontColor: "#fff",
-                multiTooltipTemplate: "<%if (datasetLabel){%><%=datasetLabel%>: <%}%><%= value %>"
+                multiTooltipTemplate: "<%if (datasetLabel){%><%=datasetLabel%>: <%}%><%= value %>",
+                legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><div class=\"square\" style=\"background-color:<%=datasets[i].strokeColor%>\"></div><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+
             };
             var canvasParent = $('.graph-bg');
             $('canvas', canvasParent).remove();
-            canvasParent.append('<canvas id="line-chart"></canvas>');
+            canvasParent.prepend('<canvas id="line-chart"></canvas>');
             var myLine = new Chart(document.getElementById("line-chart").getContext("2d")).Line(lineChartData, options);
             var legend = myLine.generateLegend();
             $('.legend').html(legend);
+            $scope.noDataAvg = dataPrice.length < 1;
 
         };
 
